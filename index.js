@@ -6,7 +6,6 @@ const compression = require("compression");
 const errorMiddleware = require("./middlewares/ErrorMiddleware");
 const env = require("./config/env");
 const connectToDatabase = require("./config/db");
-const UserRouter = require("./routes/user.route");
 const Routes = require("./routes");
 
 const app = express();
