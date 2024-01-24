@@ -1,16 +1,18 @@
 const express = require("express");
+require("dotenv").config();
 const cors = require("cors");
 const morgan = require("morgan");
 const helmet = require("helmet");
 const compression = require("compression");
 const errorMiddleware = require("./middlewares/ErrorMiddleware");
-const env = require("./config/env");
 const connectToDatabase = require("./config/db");
 const Routes = require("./routes");
 
+const port = process.env.port;
+
 const app = express();
 
-connectToDatabase(env.mongoURL);
+connectToDatabase();
 
 app.use(
   cors({
@@ -33,6 +35,6 @@ Routes.map(({ path, router }) => app.use(path, router));
 
 app.use(errorMiddleware);
 
-app.listen(env.port, () => {
-  console.log(`running at port ${env.port}`);
+app.listen(port, () => {
+  console.log(`running at port ${port}`);
 });
