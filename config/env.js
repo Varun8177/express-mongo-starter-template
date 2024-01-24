@@ -11,6 +11,9 @@ const validateEnv = () => {
   const cleanedEnv = cleanEnv(env, {
     port: port(),
     mongoURL: str(),
+    NODE_ENV: str({
+      choices: ["development", "test", "production", "staging"],
+    }),
   });
 
   console.log("Validated env: It's all good!");
