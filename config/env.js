@@ -13,6 +13,7 @@ const validateEnv = () => {
     mongoURL: str(),
     NODE_ENV: str({
       choices: ["development", "test", "production", "staging"],
+      default: "development",
     }),
   });
 
