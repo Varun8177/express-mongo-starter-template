@@ -8,18 +8,21 @@ const validateEnv = () => {
     path: `.env`,
   }).parsed;
 
-  const cleanedEnv = cleanEnv(env, {
-    port: port(),
-    mongoURL: str(),
-    NODE_ENV: str({
-      choices: ["development", "test", "production", "staging"],
-      default: "development",
-    }),
-  });
+  if (env.NODE_ENV === "development") {
+    const cleanedEnv = cleanEnv(env, {
+      port: port(),
+      mongoURL: str(),
+      NODE_ENV: str({
+        choices: ["development", "test", "production", "staging"],
+        default: "development",
+      }),
+    });
 
-  console.log("Validated env: It's all good!");
+    console.log("Validated env: It's all good!");
 
-  return cleanedEnv;
+    return cleanedEnv;
+  }
+  return env;
 };
 
 const env = validateEnv();
